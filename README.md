@@ -1,2 +1,2 @@
 # scratchpad
-temporary scratchpad repository
+General purpose repository for works in progress.
