@@ -1,0 +1,73 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "site-plan-sno-du-1"
+  namespace: "clusters-sub"
+spec:
+  baseDomain: "ptp.lab.eng.bos.redhat.com"
+  pullSecretRef:
+    name: "test-pull-secret"
+  clusterImageSetNameRef: "openshift-v4.8.0"
+  sshPublicKey: "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFjkDZdkSOhY2U2Dx0MRLLQDMXp8axGC2qbS37FnMqSD86R1Om4q+EC9c8D19LLfn7yNFvJOpY+fFefuLSHxfm4= imiller@redhat.com"
+  sshPrivateKeySecretRef:
+    name: "sshPrvKey"
+  clusters:
+  - clusterName: "Xnfocto1"
+    clusterType: sno
+    clusterProfile: du
+    clusterLabels:
+      group-du-sno: ""
+      common: true
+      sites : "site-Xnfocto1"
+    clusterNetwork:
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
+    machineNetwork:
+      - cidr: 10.16.231.0/24
+    serviceNetwork:
+      - 172.30.0.0/16
+    manifestsConfig:
+      ntpServer: "pool.ntp.org"
+    additionalNTPSources:
+      - NTP.server1
+      - 10.16.231.22
+    ignitionConfigOverride: "igen"
+    nodes:
+      - hostName: "node1"
+        bmcAddress: "redfish-virtualmedia+https://10.16.121.777/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "Xnfocto1-bmh-secret"
+        bootMACAddress: "E4:43:4B:F6:12:E0"
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: "/dev/sda"
+          vendor: "sata"
+          model: "baseModel"
+        userData:
+          bootKey: value12
+        nodeNetwork:
+          interfaces:
+            - name: eno1
+              macAddress: "E4:43:4B:F6:12:E0"
+          config:
+            interfaces:
+              - name: eno1
+                macAddress: "E4:43:4B:F6:12:E0"
+                type: ethernet
+                ipv6:
+                  enabled: true
+                  dhcp: false
+                  address:
+                  - "10.16.231.11/24"
+                  - "10.16.231.43/24"
+                  - "10.16.231.44/24"
+            dns-resolver:
+              config:
+                server:
+                  - "10.19.42.41"
+            routes:
+              config:
+                - destination: 0.0.0.0/0
+                  next-hop-address: "10.16.231.254"
+                  next-hop-interface: eno1
+                  table-id: 254
