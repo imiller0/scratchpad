@@ -1,7 +1,7 @@
 apiVersion: ran.openshift.io/v1
 kind: SiteConfig
 metadata:
-  name: "site-plan-xnfocto1"
+  name: "site-plan-cnfocto1"
   namespace: "clusters-sub"
 spec:
   baseDomain: "ptp.lab.eng.bos.redhat.com"
@@ -12,13 +12,13 @@ spec:
   sshPrivateKeySecretRef:
     name: "sshPrvKey testE"
   clusters:
-  - clusterName: "xnfocto1"
+  - clusterName: "cnfocto1"
     clusterType: sno
     clusterProfile: du
     clusterLabels:
       group-du-sno: ""
       common: true
-      sites : "site-xnfocto1"
+      sites : "site-cnfocto1"
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
@@ -38,7 +38,7 @@ spec:
         #bmcAddress: "redfish-virtualmedia+https://10.16.121.77/redfish/v1/Systems/System.Embedded.1"
         bmcAddress: "idrac-virtualmedia+https://10.16.231.77/redfish/v1/Systems/System.Embedded.1"
         bmcCredentialsName:
-          name: "xnfocto1-bmh-secret"
+          name: "cnfocto1-bmh-secret"
         bootMACAddress: "E4:43:4B:F6:12:E0"
         bootMode: "UEFI"
         rootDeviceHints:
