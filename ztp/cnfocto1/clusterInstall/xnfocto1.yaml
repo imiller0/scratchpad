@@ -60,9 +60,12 @@ spec:
                   enabled: true
                   dhcp: false
                   address:
-                  - "10.16.231.11/24"
-                  - "10.16.231.43/24"
-                  - "10.16.231.44/24"
+                    - ip: 10.16.231.11
+                      prefix-length: 24
+                    - ip: 10.16.231.43
+                      prefix-length: 24
+                    - ip: 10.16.231.44
+                      prefix-length: 24
             dns-resolver:
               config:
                 server:
