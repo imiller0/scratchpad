@@ -25,7 +25,7 @@ spec:
     serviceNetwork:
       - 172.30.0.0/16
     manifestsConfig:
-      ntpServer: "pool.ntp.org"
+      ntpServer: "0.pool.ntp.org"
     additionalNTPSources:
       - 0.pool.ntp.org
     # This config sets up registries for ocp-release and RHACM in quay.io:443
