@@ -1,0 +1,20 @@
+#ansible-playbook test.yaml  -e "cluster_name=test.clusters.local"
+- name: get service
+  hosts: localhost
+
+  tasks:
+  - block:
+    - name: get service
+      kubernetes.core.k8s_info:
+        host: https://api.{{cluster_name}}:6443
+        api_key: "{{ api_key }}"
+        validate_certs: false
+        kind: Service
+        namespace: default
+        field_selectors:
+          - metadata.name=kubernetes
+      register: test_service
+
+    - debug:
+        var: test_service
+
