@@ -1,6 +1,10 @@
 #ansible-playbook test.yaml  -e "cluster_name=test.clusters.local"
 - name: get service
   hosts: localhost
+  gather_facts: no
+
+  collections:
+    - kubernetes
 
   tasks:
   - block:
