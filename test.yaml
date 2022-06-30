@@ -8,16 +8,22 @@
 
   tasks:
   - block:
+    - name: test get info
+      kubernetes.core.k8s_info:
+        kind: Node
+        namespace: default
+      register: test_service
+
     - name: get service
       kubernetes.core.k8s_info:
         host: https://api.{{cluster_name}}:6443
-        api_key: "{{ api_key }}"
+        #api_key: "{{ api_key }}"
         validate_certs: false
         kind: Service
         namespace: default
         field_selectors:
           - metadata.name=kubernetes
-      register: test_service
+      register: test_service_1
 
     - debug:
         var: test_service
