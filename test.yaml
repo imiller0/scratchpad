@@ -8,17 +8,6 @@
 
   tasks:
   - block:
-    - name: debug vars
-      vars:
-        msg: |
-          All vars
-          {{ vars | to_nice_json }}
-
-          Host vars
-          {{ hostvars | to_nice_json }}
-      debug:
-        msg: "{{ msg.split('\n') }}"
-
     - name: authenticate with hub
       kubernetes.core.k8s_auth:
         host: "https://api.{{ hub }}:6443"
