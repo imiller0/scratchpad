@@ -22,6 +22,7 @@
     - name: authenticate with hub
       kubernetes.core.k8s_auth:
         host: "https://api.{{ first_var }}:6443"
+        validate_certs: no
         username: "{{ user }}"
         password: "{{ pass }}"
       register: ocp_auth
