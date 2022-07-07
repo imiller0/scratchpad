@@ -21,7 +21,7 @@
 
     - name: authenticate with hub
       kubernetes.core.k8s_auth:
-        host: "https://api.{{ first_var }}:6443"
+        host: "https://api.{{ hub }}:6443"
         validate_certs: no
         username: "{{ user }}"
         password: "{{ pass }}"
@@ -30,7 +30,7 @@
     - name: test get info
       kubernetes.core.k8s_info:
         api_key: "{{ ocp_auth.k8s_auth.api_key }}"
-        host: "https://api.{{ first_var }}:6443"
+        host: "https://api.{{ hub }}:6443"
         validate_certs: no
         kind: Node
         namespace: default
@@ -38,4 +38,17 @@
 
     - debug:
         var: test_service
+
+    - name: test get kube
+      kubernetes.core.k8s_info:
+        api_key: "{{ ocp_auth.k8s_auth.api_key }}"
+        host: "https://api.{{ hub }}:6443"
+        validate_certs: no
+        kind: Secret
+        namespace: "{{ spoke }}"
+        name: "{{ spoke }}-admin-kubeconfig"
+      register: test_kube
+
+    - debug:
+        var: test_kube
 
