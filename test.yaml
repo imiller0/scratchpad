@@ -8,6 +8,14 @@
 
   tasks:
   - block:
+    - name: debug vars
+      vars:
+        msg: |
+          All vars
+          {{ vars | to_nice_json }}
+      debug:
+        msg: "{{ msg.split('\n') }}"
+
     - name: test get info
       kubernetes.core.k8s_info:
         kind: Node
