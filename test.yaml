@@ -28,6 +28,7 @@
     - name: test get info
       kubernetes.core.k8s_info:
         api_key: "{{ ocp_auth.k8s_auth.api_key }}"
+        host: "https://api.{{ first_var }}:6443"
         kind: Node
         namespace: default
       register: test_service
