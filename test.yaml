@@ -16,12 +16,18 @@
 
           Host vars
           {{ hostvars | to_nice_json }}
-          
       debug:
         msg: "{{ msg.split('\n') }}"
 
+    - name: authenticate with hub
+      kubernetes.core.k8s_auth:
+        username: {{ user }}
+        password: {{ pass }}
+      register: ocp_auth
+
     - name: test get info
       kubernetes.core.k8s_info:
+        api_key: "{{ ocp_auth.k8s_auth.api_key }}"
         kind: Node
         namespace: default
       register: test_service
