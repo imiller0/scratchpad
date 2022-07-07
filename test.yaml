@@ -3,8 +3,8 @@
   hosts: localhost
   gather_facts: no
 
-  collections:
-    - kubernetes
+#  collections:
+#    - kubernetes
 
   tasks:
   - block:
