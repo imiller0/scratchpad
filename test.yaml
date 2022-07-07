@@ -16,18 +16,6 @@
         password: "{{ pass }}"
       register: ocp_auth
 
-    - name: test get info
-      kubernetes.core.k8s_info:
-        api_key: "{{ ocp_auth.k8s_auth.api_key }}"
-        host: "https://api.{{ hub }}:6443"
-        validate_certs: no
-        kind: Node
-        namespace: default
-      register: test_service
-
-    - debug:
-        var: test_service
-
     - name: test get kube
       kubernetes.core.k8s_info:
         api_key: "{{ ocp_auth.k8s_auth.api_key }}"
@@ -40,4 +28,17 @@
 
     - debug:
         var: test_kube
+
+    - name: test get kube
+      kubernetes.core.k8s_info:
+        api_key: "{{ ocp_auth.k8s_auth.api_key }}"
+        host: "https://api.{{ hub }}:6443"
+        validate_certs: no
+        kind: Secret
+        namespace: "{{ target_clusters[0] }}"
+        name: "{{ target_clusters[0] }}-admin-password"
+      register: test_pass
+
+    - debug:
+        var: test_pass
 
