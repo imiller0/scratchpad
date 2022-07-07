@@ -21,8 +21,8 @@
 
     - name: authenticate with hub
       kubernetes.core.k8s_auth:
-        username: {{ user }}
-        password: {{ pass }}
+        username: "{{ user }}"
+        password: "{{ pass }}"
       register: ocp_auth
 
     - name: test get info
