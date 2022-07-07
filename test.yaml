@@ -45,8 +45,8 @@
         host: "https://api.{{ hub }}:6443"
         validate_certs: no
         kind: Secret
-        namespace: "{{ spoke }}"
-        name: "{{ spoke }}-admin-kubeconfig"
+        namespace: "{{ target_clusters[0] }}"
+        name: "{{ target_clusters[0] }}-admin-kubeconfig"
       register: test_kube
 
     - debug:
